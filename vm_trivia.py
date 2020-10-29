@@ -21,6 +21,7 @@ def trivia_request_callback(client,userdata,message):
     print(trivia[1])
     client.publish("alyssasrpi/trivia_question",trivia[0])
     client.publish("alyssasrpi/trivia_answer",trivia[1])
+    #client.publish("alyssasrpi/trivia",trivia[1])
 
 
 
