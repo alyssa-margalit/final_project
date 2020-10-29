@@ -16,7 +16,14 @@ def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
 def trivia_request_callback(client,userdata,message):
     print(str(message.payload, "utf-8"))
-    
+    trivia = trivia_init()
+    print(trivia[0])
+    print(trivia[1])
+    client.publish("alyssasrpi/trivia_question",trivia[0])
+    client.publish("alyssasrpi/trivia_answer",trivia[1])
+
+
+
 def button_callback(client,userdata,message):
     #print("on_message: " + message.topic + " " + str(message.payload, "utf-8"))
     print(str(message.payload, "utf-8"))#when button is pressed, print out the message "button pressed"
@@ -63,3 +70,5 @@ if __name__ == '__main__':
     print(trivia[1])
 
     client.publish("alyssasrpi/trivia",trivia[1])
+    while True:
+        time.sleep(1)

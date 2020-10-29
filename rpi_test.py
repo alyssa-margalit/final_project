@@ -6,14 +6,18 @@ from grovepi import *
 import math
 import paho.mqtt.client as mqtt
 
-def trivia_callback(client,userdata,message):
+def trivia_question_callback(client,userdata,message):
+	print(str(message.payload, "utf-8"))
+def trivia_answer_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 #subscribe tp all the different topics
-    client.subscribe("alyssasrpi/trivia")
-    client.message_callback_add("alyssasrpi/trivia", trivia_callback)
+    client.subscribe("alyssasrpi/trivia_question")
+    client.message_callback_add("alyssasrpi/trivia_question", trivia__question_callback)
+    client.subscribe("alyssasrpi/trivia_answer")
+    client.message_callback_add("alyssasrpi/trivia_answer", trivia_answer_callback)
     #client.subscribe("alyssasrpi/button")
     #client.message_callback_add("alyssasrpi/button", button_callback)
 
