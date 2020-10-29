@@ -20,5 +20,7 @@ while True:
 	#setRGB(0,0,255)
 	distance = ultrasonicRead(ranger)
 	distance = int(distance)
-	if distance<10:
+	if distance>10:
 		setRGB(255,0,0)
+	else:
+		setRGB(0,255,0)
