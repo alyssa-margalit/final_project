@@ -79,7 +79,9 @@ if __name__ == '__main__':
 			if response =="yes":
 				setRGB(0,0,255)
 				setText("then you must answer my trivia")
-				time.sleep(5)
+				
+				client.publish("alyssasrpi/trivia_request", "ready")
+				time.sleep(10)
 				#publish request for trivia
 
 

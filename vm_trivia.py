@@ -9,8 +9,14 @@ import math
 # Reddit API: https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=boolean
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
+    client.subscribe("alyssasrpi/trivia_request")
+    client.message_callback_add("alyssasrpi/trivia_request", trivia_request_callback)
+
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
+def trivia_request_callback(client,userdata,message):
+    print(str(message.payload, "utf-8"))
+    
 def button_callback(client,userdata,message):
     #print("on_message: " + message.topic + " " + str(message.payload, "utf-8"))
     print(str(message.payload, "utf-8"))#when button is pressed, print out the message "button pressed"
@@ -55,5 +61,5 @@ if __name__ == '__main__':
     trivia = trivia_init()
     print(trivia[0])
     print(trivia[1])
-    
+
     client.publish("alyssasrpi/trivia",trivia[1])
