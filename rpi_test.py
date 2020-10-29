@@ -23,6 +23,7 @@ while True:
 	#begin the sequence
 	distance = ultrasonicRead(ranger)
 	distance = int(distance)
+	story = 0
 	if distance>10:
 		story = 1
 	if story ==1:
@@ -30,9 +31,11 @@ while True:
 		setText("who dares disturb my slumber")
 		time.sleep(5)
 		setText("have you come for my precious treasure?")
+		time.sleep(5)
 		choice = 0
 		while choice ==0:
 			pot = grovepi.analogRead(potentiometer)
+			print(pot)
 			pressed = digitalRead(button)
 			if pressed:
 				if pot>500:
@@ -41,11 +44,16 @@ while True:
 					response = "no"
 				choice = 1
 		if response == "no":
+			setRGB(0,255,0)
 			setText("then replace it and go away")
+			time.sleep(5)
 			story = 0
 			break
 		if response =="yes":
+			setRGB(0,0,255)
 			setText("then you must answer my trivia")
+			time.sleep(5)
+
 			#publish request for trivia
 
 
