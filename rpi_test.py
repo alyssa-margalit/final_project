@@ -14,6 +14,9 @@ potentiometer = 2
 
 grovepi.pinMode(red_led, "OUTPUT")
 grovepi.pinMode(green_led, "OUTPUT")
+grovepi.pinMode(buzzer, "OUTPUT")
+grovepi.pinMode(button, "INPUT")
+
 
 while True: 
 	digitalWrite(green_led,1)
@@ -24,3 +27,4 @@ while True:
 		setRGB(255,0,0)
 	else:
 		setRGB(0,255,0)
+	setText_norefresh("hi")
