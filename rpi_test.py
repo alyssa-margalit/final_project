@@ -28,3 +28,5 @@ while True:
 	else:
 		setRGB(0,255,0)
 	setText_norefresh("hi")
+	pot = grovepi.analogRead(potentiometer)
+	print(pot)
