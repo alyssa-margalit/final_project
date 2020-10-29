@@ -53,5 +53,7 @@ if __name__ == '__main__':
     client.loop_start()
     trivia_init()
     trivia = trivia_init()
-    print(trivia)
-    publish("alyssasrpi/trivia",trivia)
+    print(trivia[0])
+    print(trivia[1])
+    
+    client.publish("alyssasrpi/trivia",trivia[1])
