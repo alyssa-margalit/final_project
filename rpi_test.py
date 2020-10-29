@@ -4,6 +4,27 @@ import grovepi
 from grove_rgb_lcd import *
 from grovepi import *
 import math
+import paho.mqtt.client as mqtt
+
+def trivia_callback(client,userdata,message):
+	print(str(message.payload, "utf-8"))
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected to server (i.e., broker) with result code "+str(rc))
+#subscribe tp all the different topics
+    client.subscribe("alyssasrpi/trivia")
+    client.message_callback_add("alyssasrpi/trivia", trivia_callback)
+    #client.subscribe("alyssasrpi/button")
+    #client.message_callback_add("alyssasrpi/button", button_callback)
+
+#Default message callback. Please use custom callbacks.
+def on_message(client, userdata, msg):
+    print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
+
+
+
+
+
 
 red_led = 8
 green_led = 7
@@ -53,14 +74,6 @@ while True:
 			setRGB(0,0,255)
 			setText("then you must answer my trivia")
 			time.sleep(5)
-
 			#publish request for trivia
 
 
-	#if distance>10:
-	#	setRGB(255,0,0)
-	#else:
-	#	setRGB(0,255,0)
-	#setText_norefresh("hi")
-	#pot = grovepi.analogRead(potentiometer)
-	#print(pot)
