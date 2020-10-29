@@ -17,4 +17,4 @@ grovepi.pinMode(green_led, "OUTPUT")
 
 while True: 
 	digitalWrite(green_led,1)
-	setText("hello")
+	setRGB(0,0,255)
