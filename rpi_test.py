@@ -6,6 +6,8 @@ from grovepi import *
 import math
 import paho.mqtt.client as mqtt
 
+story = 0
+
 def trivia_question_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
 	setText(str(message.payload, "utf-8"))
@@ -35,12 +37,8 @@ def trivia_answer_callback(client,userdata,message):
 	if response == str(message.payload, "utf-8"):
 		setText("You are worthy!!")
 	else:
-		setText("Fail!! Return the treasure at once or face my wrath!!")
-		time.sleep(5)
-		distance = ultrasonicRead(ranger)
-		print(distance)
-		if distance<10:
-			setText("better luck next time")
+		story = 2
+		print("story 2")
 		#if distace < 10:
 			#setRGB(0,255,0)
 			#setText("better luck next time :)")
