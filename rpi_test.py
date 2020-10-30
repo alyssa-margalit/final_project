@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
 
 	while True: 
-		print(story)
+		#print(story)
 		#begin the sequence
 		distance = ultrasonicRead(ranger)
 		distance = int(distance)
