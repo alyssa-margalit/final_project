@@ -39,9 +39,8 @@ def trivia_answer_callback(client,userdata,message):
 		time.sleep(5)
 		distance = ultrasonicRead(ranger)
 		print(distance)
-		while True:
-			distance = int(distance)
-			time.sleep(2)
+		if distance<10:
+			setText("better luck next time")
 		#if distace < 10:
 			#setRGB(0,255,0)
 			#setText("better luck next time :)")
