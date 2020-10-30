@@ -82,7 +82,7 @@ if __name__ == '__main__':
 			time.sleep(5)
 			while True:
 				pot = grovepi.analogRead(potentiometer)
-				print(pot)
+				#print(pot)
 				pressed = digitalRead(button)
 				if pressed:
 					if pot>500:
@@ -92,6 +92,52 @@ if __name__ == '__main__':
 						response = "no"
 						break
 			print(response)
+			if response == "no":
+				setRGB(0,255,0)
+				setText("then replace it and go away")
+				time.sleep(5)
+				story = 0
+			if response =="yes":
+				setRGB(0,0,255)
+				setText("then you must answer my trivia")
+				
+				client.publish("alyssasrpi/trivia_request", "ready")
+				time.sleep(10)
+				while True:
+					pot = grovepi.analogRead(potentiometer)
+					#print(pot)
+					pressed = digitalRead(button)
+					if pressed:
+						if pot>500:
+							response = "True"
+							break
+						else:
+							response = "False"
+							break
+					print(response)
+					print(answer)
+				if response == answer:
+					setRGB(0,255,0)
+					setText("You are worthy! Keep the treasure and guard it with your life!")
+					time.sleep(3)
+					setText("Password is: ")
+					time.sleep(3)
+					#dont forget to enter password here
+
+					story = 400
+				else: 
+					setText("Fail! Return the treasure at once!!")
+					time.sleep(5)
+					dist = ultrasonicRead(ranger)
+					print(dist)
+					if dist <10:
+						setText("better luck next time!")
+						time.sleep(5)
+					else:
+						setText("I hereby curse you with eternal syntax errors!!!")
+						time.sleep(5)
+						story = 400
+
 			
 
 				
