@@ -8,7 +8,7 @@ import paho.mqtt.client as mqtt
 
 global story
 
-story = 2
+story = 0
 
 def trivia_question_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
@@ -130,6 +130,10 @@ if __name__ == '__main__':
 				#publish request for trivia
 		if story ==2:
 			print("yup")
+			setText("return the treasure at once or face my wrath!!")
+			distance = ultrasonicRead(ranger)
+			print(distance)
+			time.sleep(3)
 
 
 
