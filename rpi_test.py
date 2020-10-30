@@ -26,10 +26,17 @@ def trivia_answer_callback(client,userdata,message):
 		if pressed:
 			if pot>500:
 				response = "True"
+				print("choice: "+response)
 
 			else:
 				response = "False"
-				choice = 1
+				print("choice: "+response)
+			choice = 1
+	if response == str(message.payload, "utf-8"):
+		setText("You are worthy!!")
+	else:
+		setText("Fail!! Return the treasure at once or face my wrath!!")
+
 
 
 def on_connect(client, userdata, flags, rc):
