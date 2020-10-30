@@ -6,7 +6,9 @@ from grovepi import *
 import math
 import paho.mqtt.client as mqtt
 
-story = 0
+global story
+
+story = 2
 
 def trivia_question_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
