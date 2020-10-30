@@ -6,7 +6,7 @@ from grovepi import *
 import math
 import paho.mqtt.client as mqtt
 
-global story
+
 
 
 
@@ -61,6 +61,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("alyssasrpi/trivia_answer", trivia_answer_callback)
     #client.subscribe("alyssasrpi/button")
     #client.message_callback_add("alyssasrpi/button", button_callback)
+    global story
     story = 0
 
 #Default message callback. Please use custom callbacks.
