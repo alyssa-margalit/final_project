@@ -8,7 +8,7 @@ import paho.mqtt.client as mqtt
 
 global story
 
-story = 0
+
 
 def trivia_question_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
@@ -40,7 +40,7 @@ def trivia_answer_callback(client,userdata,message):
 		setText("You are worthy!!")
 	else:
 		story = 2
-		print("story 2")
+		print(story)
 		#if distace < 10:
 			#setRGB(0,255,0)
 			#setText("better luck next time :)")
@@ -61,6 +61,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("alyssasrpi/trivia_answer", trivia_answer_callback)
     #client.subscribe("alyssasrpi/button")
     #client.message_callback_add("alyssasrpi/button", button_callback)
+    story = 0
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
