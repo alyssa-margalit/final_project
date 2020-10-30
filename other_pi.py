@@ -103,20 +103,21 @@ if __name__ == '__main__':
 				
 				client.publish("alyssasrpi/trivia_request", "ready")
 				time.sleep(10)
+
 				while True:
 					pot = grovepi.analogRead(potentiometer)
 					#print(pot)
 					pressed = digitalRead(button)
 					if pressed:
 						if pot>500:
-							response = "True"
+							response1 = "True"
 							break
 						else:
-							response = "False"
+							response1 = "False"
 							break
-					print(response)
-					print(answer)
-				if response == answer:
+				print(response1)
+				print(answer)
+				if response1 == answer:
 					setRGB(0,255,0)
 					setText("You are worthy! Keep the treasure and guard it with your life!")
 					time.sleep(3)
