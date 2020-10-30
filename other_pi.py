@@ -30,8 +30,8 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("alyssasrpi/trivia_question", trivia_question_callback)
     client.subscribe("alyssasrpi/trivia_answer")
     client.message_callback_add("alyssasrpi/trivia_answer", trivia_answer_callback)
-    global story
-    story = 5
+    #global story
+    #story = 5
     #client.subscribe("alyssasrpi/button")
     #client.message_callback_add("alyssasrpi/button", button_callback)
 
@@ -69,8 +69,8 @@ if __name__ == '__main__':
 		#begin the sequence
 		distance = ultrasonicRead(ranger)
 		distance = int(distance)
-		if story != 400:
-			story = 0
+		#if story != 400:
+		story = 0
 		if story == 0:
 			if distance>10:
 				story = 1
