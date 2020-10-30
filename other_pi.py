@@ -80,17 +80,17 @@ if __name__ == '__main__':
 			time.sleep(5)
 			setText("have you come for my precious treasure?")
 			time.sleep(5)
-			choice = 0
-			while choice ==0:
+			while True:
 				pot = grovepi.analogRead(potentiometer)
 				print(pot)
 				pressed = digitalRead(button)
 				if pressed:
 					if pot>500:
 						response = "yes"
+						break
 					else:
 						response = "no"
-				choice = 1
+						break
 			print(response)
 			
 
