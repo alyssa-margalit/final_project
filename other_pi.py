@@ -13,42 +13,13 @@ import paho.mqtt.client as mqtt
 def trivia_question_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
 	setText(str(message.payload, "utf-8"))
-				#if response ==str(message.payload, "utf-8"):
-					#setRGB(255,0,0)
-					#setText("You are worthy!!")
-				#else:
-					#setText("fail! return the treasure or face my wrath")
 
 
 def trivia_answer_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
-	choice = 0
-	while choice ==0:
-		pot = grovepi.analogRead(potentiometer)
-				#print(pot)
-		pressed = digitalRead(button)
-		if pressed:
-			if pot>500:
-				response = "True"
-				print("choice: "+response)
-
-			else:
-				response = "False"
-				print("choice: "+response)
-			choice = 1
-	if response == str(message.payload, "utf-8"):
-		setText("You are worthy!!")
-	else:
-		story = 2
-		print(story)
-		#if distace < 10:
-			#setRGB(0,255,0)
-			#setText("better luck next time :)")
-			#time.sleep(3)
-		#else:
-			#setRGB(255,0,0)
-			#setText("YOU ARE BANISHED!!!")
-			#time.sleep(10)
+	global answer
+	answer = str(message.payload, "utf-8")
+	
 
 
 
@@ -61,8 +32,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("alyssasrpi/trivia_answer", trivia_answer_callback)
     #client.subscribe("alyssasrpi/button")
     #client.message_callback_add("alyssasrpi/button", button_callback)
-    global story
-    story = 0
+
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -85,7 +55,6 @@ if __name__ == '__main__':
 	ranger = 3
 	buzzer = 2
 	potentiometer = 2
-	story = 50
 
 	grovepi.pinMode(red_led, "OUTPUT")
 	grovepi.pinMode(green_led, "OUTPUT")
@@ -98,6 +67,8 @@ if __name__ == '__main__':
 		#begin the sequence
 		distance = ultrasonicRead(ranger)
 		distance = int(distance)
+		if story != 400:
+			story = 0
 		if story == 0:
 			if distance>10:
 				story = 1
@@ -117,26 +88,51 @@ if __name__ == '__main__':
 						response = "yes"
 					else:
 						response = "no"
-					choice = 1
+				choice = 1
 			if response == "no":
 				setRGB(0,255,0)
 				setText("then replace it and go away")
 				time.sleep(5)
 				story = 0
-				break
 			if response =="yes":
 				setRGB(0,0,255)
 				setText("then you must answer my trivia")
 				
 				client.publish("alyssasrpi/trivia_request", "ready")
 				time.sleep(10)
-				#publish request for trivia
-		if story ==2:
-			print("yup")
-			setText("return the treasure at once or face my wrath!!")
-			distance = ultrasonicRead(ranger)
-			print(distance)
-			time.sleep(3)
+				choice = 0
+				while choice ==0:
+					pot = grovepi.analogRead(potentiometer)
+					#print(pot)
+					pressed = digitalRead(button)
+					if pressed:
+						if pot>500:
+							response = "True"
+						else:
+							response = "False"
+					choice = 1
+				if response == answer:
+					setRGB(0,255,0)
+					setText("You are worthy! Keep the treasure and guard it with your life!")
+					time.sleep(3)
+					setText("Password is: ")
+					#dont forget to enter password here
+
+					story = 400
+				else: 
+					setText("Fail! Return the treasure at once!!")
+					time.sleep(5)
+					dist = ultrasonicRead(ranger)
+					print(dist)
+					if dist <10:
+						setText("better luck next time!")
+					else:
+						setText("I hereby curse you with eternal syntax errors!!!")
+						story = 400
+
+
+				
+			
 
 
 

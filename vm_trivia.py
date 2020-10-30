@@ -7,10 +7,12 @@ import time
 import sys
 import math
 # Reddit API: https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=boolean
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
     client.subscribe("alyssasrpi/trivia_request")
     client.message_callback_add("alyssasrpi/trivia_request", trivia_request_callback)
+    
 
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
@@ -69,7 +71,7 @@ if __name__ == '__main__':
     trivia = trivia_init()
     print(trivia[0])
     print(trivia[1])
-
+    #print(answer)
     client.publish("alyssasrpi/trivia",trivia[1])
     while True:
         time.sleep(1)
