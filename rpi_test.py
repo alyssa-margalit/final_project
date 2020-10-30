@@ -38,15 +38,18 @@ def trivia_answer_callback(client,userdata,message):
 		setText("Fail!! Return the treasure at once or face my wrath!!")
 		time.sleep(5)
 		distance = ultrasonicRead(ranger)
-		distance = int(distance)
-		if distace < 10:
-			setRGB(0,255,0)
-			setText("better luck next time :)")
-			time.sleep(3)
-		else:
-			setRGB(255,0,0)
-			setText("YOU ARE BANISHED!!!")
-			time.sleep(10)
+		print(distance)
+		while True:
+			distance = int(distance)
+			time.sleep(2)
+		#if distace < 10:
+			#setRGB(0,255,0)
+			#setText("better luck next time :)")
+			#time.sleep(3)
+		#else:
+			#setRGB(255,0,0)
+			#setText("YOU ARE BANISHED!!!")
+			#time.sleep(10)
 
 
 
