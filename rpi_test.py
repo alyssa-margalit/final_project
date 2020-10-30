@@ -93,9 +93,9 @@ if __name__ == '__main__':
 		#begin the sequence
 		distance = ultrasonicRead(ranger)
 		distance = int(distance)
-		story = 0
-		if distance>10:
-			story = 1
+		if story == 0:
+			if distance>10:
+				story = 1
 		if story ==1:
 			setRGB(255,0,0)
 			setText("who dares disturb my slumber")
@@ -126,5 +126,8 @@ if __name__ == '__main__':
 				client.publish("alyssasrpi/trivia_request", "ready")
 				time.sleep(10)
 				#publish request for trivia
+		if story ==2:
+			print("yup")
+
 
 
