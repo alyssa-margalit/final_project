@@ -8,27 +8,28 @@ import paho.mqtt.client as mqtt
 
 def trivia_question_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
-	choice = 0
-	while choice ==0:
-				pot = grovepi.analogRead(potentiometer)
-				#print(pot)
-				pressed = digitalRead(button)
-				if pressed:
-					if pot>500:
-						response = "True"
-					else:
-						response = "False"
-					choice = 1
-				if response ==str(message.payload, "utf-8"):
-					setRGB(255,0,0)
-					setText("You are worthy!!")
-				else:
-					setText("fail! return the treasure or face my wrath")
+	setText(str(message.payload, "utf-8"))
+				#if response ==str(message.payload, "utf-8"):
+					#setRGB(255,0,0)
+					#setText("You are worthy!!")
+				#else:
+					#setText("fail! return the treasure or face my wrath")
 
 
 def trivia_answer_callback(client,userdata,message):
 	print(str(message.payload, "utf-8"))
-	setText(str(message.payload, "utf-8"))
+	choice = 0
+	while choice ==0:
+		pot = grovepi.analogRead(potentiometer)
+				#print(pot)
+		pressed = digitalRead(button)
+		if pressed:
+			if pot>500:
+				response = "True"
+
+			else:
+				response = "False"
+				choice = 1
 
 
 def on_connect(client, userdata, flags, rc):
