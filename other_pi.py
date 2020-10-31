@@ -150,7 +150,7 @@ if __name__ == '__main__':
 							if pressed:
 								state = 2
 								print("two press")
-						elif: state==2:
+						elif state==2:
 							pot = grovepi.analogRead(potentiometer)
 							if pot>500:
 								print("three press")
