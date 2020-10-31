@@ -25,5 +25,5 @@ def magentaOn():
 def main():
 	while True:
 		magentaOn()
-return
+
 main()
