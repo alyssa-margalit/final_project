@@ -107,7 +107,7 @@ if __name__ == '__main__':
 			print(response)
 			if response == "no":
 				setRGB(0,255,0)
-				setText("then replace it and go away")
+				setText("then replace the key and go away")
 				time.sleep(5)
 				story = 0
 			if response =="yes":
@@ -132,10 +132,27 @@ if __name__ == '__main__':
 				print(answer)
 				if response1 == answer:
 					setRGB(0,255,0)
-					setText("You are worthy! Keep the treasure and guard it with your life!")
+					setText("You are worthy!")
 					time.sleep(3)
-					setText("Password is: ")
+					setText("Enter password 123 to unlock ")
 					time.sleep(3)
+					state = 0
+
+					while True:
+
+						if state ==0:
+							pressed = digitalRead(button)
+							if pressed:
+								state = 1
+								print("one press")
+						elif state==1:
+							pressed = digitalRead(button)
+							if pressed:
+								state = 2
+								print("two press")
+								break
+						time.sleep(.3)
+
 					#dont forget to enter password here
 
 					story = 400
