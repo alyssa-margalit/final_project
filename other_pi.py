@@ -13,7 +13,7 @@ GPIO.setup(servoPIN, GPIO.OUT)
 
 p = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
 p.start(2.5) # Initialization
-
+GPIO.setwarnings(False)
 
 
 
@@ -85,6 +85,7 @@ if __name__ == '__main__':
 				p.ChangeDutyCycle(10)
 				time.sleep(1)
 				p.ChangeDutyCycle(2.5)
+				GPIO.cleanup()
 		if story ==1:
 			setRGB(255,0,0)
 			setText("who dares disturb my slumber")
