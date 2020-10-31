@@ -85,7 +85,6 @@ if __name__ == '__main__':
 	ranger = 3
 	buzzer = 2
 	potentiometer = 2
-	story = 50
 
 	grovepi.pinMode(red_led, "OUTPUT")
 	grovepi.pinMode(green_led, "OUTPUT")
