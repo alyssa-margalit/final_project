@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 redPin   = 11
 greenPin = 13
 bluePin  = 15
-
+GPIO.setwarnings(False)
 def blink(pin):
 	GPIO.setmode(GPIO.BOARD)
 	GPIO.setup(pin, GPIO.OUT)
@@ -24,6 +24,11 @@ def magentaOn():
 	blink(bluePin)
 def main():
 	while True:
-		magentaOn()
+		redOn()
+		time.sleep(2)
+		greenOn()
+		time.sleep(2)
+		blueOn()
+		time.sleep(2)
 
 main()
